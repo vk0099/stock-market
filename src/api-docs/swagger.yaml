@@ -1,0 +1,225 @@
+openapi: 3.0.0
+info:
+    title: 'twitter clone'
+    version: 1.0.0
+    description: 'Node.js application with mongodb'
+
+servers:
+    - url: http://localhost:3000/api/v1
+      description: SwaggerHub API Auto Mocking
+tags:
+    - name: login
+      description: Secured Signup Calls
+    - name: wallet
+    - name: portfolio
+paths:
+    /login/signup/:
+        post:
+            tags:
+                - 'login'
+            summary: 'Create an user record'
+            description: 'you will provide details to sign up the user for app'
+            responses:
+                200:
+                    description: 'user created sucessfully'
+                400:
+                    description: 'Account already exists or  Unable to send otp or create user record, please try again.'
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                email:
+                                    type: string
+                                    example: 'vamsikrishngonuguntla77@gmail.com'
+                                name:
+                                    type: string
+                                    example: vamsi
+                                password:
+                                    type: string
+                                    example: vk0099
+                            description: 'values to edit in the user detail'
+    /login:
+        post:
+            tags:
+                - 'login'
+            summary: 'user login sucessfully'
+            description: 'you will provide details to login the user for app'
+            responses:
+                200:
+                    description: 'user login sucessfully'
+                400:
+                    description: 'user failed to login'
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                email:
+                                    type: string
+                                    example: 'vamsikrishngonuguntla77@gmail.com'
+                                password:
+                                    type: string
+                                    example: vk0099
+                            description: 'values to edit in the user detail'
+    /logout/:
+        get:
+            security:
+                - token: []
+            tags:
+                - 'login'
+            summary: 'user logout'
+            description: 'user logout from device'
+            responses:
+                200:
+                    description: 'Successfully got the logedout'
+                400:
+                    description: 'Unable to get the logout.'
+
+    /wallet/:
+        get:
+            security:
+                - token: []
+            tags:
+                - 'wallet'
+            summary: 'check balance'
+            description: 'complete wallet details'
+            responses:
+                200:
+                    description: 'sucessfully got the wallet deatils'
+                400:
+                    description: 'unable to wallet deatils'
+    /wallet/add-money:
+        post:
+            security:
+                - token: []
+            tags:
+                - wallet
+            summary: 'add money'
+            description: 'deposit money to wallet'
+            responses:
+                200:
+                    description: 'sucessfully deposited money to wallet'
+                400:
+                    description: 'unable to deposit money to wallet'
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                ampunt:
+                                    type: number
+                                    example: 10000
+    /wallet/withdraw-money:
+        post:
+            security:
+                - token: []
+            tags:
+                - wallet
+            summary: 'withdraw money'
+            description: 'withdraw money to wallet'
+            responses:
+                200:
+                    description: 'sucessfully withdraw money to wallet'
+                400:
+                    description: 'unable to withdaw money to wallet'
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                ampunt:
+                                    type: number
+                                    example: 10000
+    /portfolio/buy-shares:
+        post:
+            security:
+                - token: []
+            tags:
+                - portfolio
+            summary: 'BUY SHARES'
+            description: 'buy shares'
+            responses:
+                200:
+                    description: 'sucessfully buyed shares'
+                400:
+                    description: 'unable to buy shares'
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                noofShares:
+                                    type: number
+                                    example: 10000
+                                companyID:
+                                    type: string
+                                    example: '6313b328ad0e58e76dad1ab0'
+    /portfolio/sell-shares:
+        post:
+            security:
+                - token: []
+            tags:
+                - portfolio
+            summary: 'SELL SHARES'
+            description: 'sell shares'
+            responses:
+                200:
+                    description: 'sucessfully selled shares'
+                400:
+                    description: 'unable to sell shares'
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                noofShares:
+                                    type: number
+                                    example: 10000
+                                companyID:
+                                    type: string
+                                    example: '6313b328ad0e58e76dad1ab0'
+    /portfolio/:
+        get:
+            security:
+                - token: []
+            tags:
+                - 'portfolio'
+            summary: 'portfolio details'
+            description: 'portfolio details'
+            responses:
+                200:
+                    description: 'sucessfully got the portfolio deatils'
+                400:
+                    description: 'unable to get portfolio deatils'
+    /portfolio/companies:
+        get:
+            security:
+                - token: []
+            tags:
+                - 'portfolio'
+            summary: 'portfolio details'
+            description: 'portfolio details'
+            responses:
+                200:
+                    description: 'sucessfully got the compaies deatils'
+                400:
+                    description: 'unable to get companies deatils'
+components:
+    securitySchemes:
+        token:
+            type: apiKey
+            in: header
+            name: authorization

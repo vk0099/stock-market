@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-    title: 'twitter clone'
+    title: 'stock market tracking'
     version: 1.0.0
     description: 'Node.js application with mongodb'
 

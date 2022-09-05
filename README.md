@@ -4,7 +4,8 @@ required software are node.js, mongodb and npm
 
 after clone the project open the respective terminal aand follow below commands to run
 
-npm install
+1.npm install
+
 2.tsc -p tsconfig.json
 
 node main.js

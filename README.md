@@ -8,6 +8,8 @@ after clone the project open the respective terminal aand follow below commands 
 
 2.tsc -p tsconfig.json
 
+if you pull it to visual studio code then after installing all the depenencies then you need to just click F5 key
+
 node main.js
 then project will run localhost:3000
 
